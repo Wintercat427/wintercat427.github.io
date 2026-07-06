@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KAITLYNNE.EXE — engineer · optimiser · builder</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Space+Grotesk:wght@400;500;700&family=Caveat:wght@600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#fdf6e3; --ink:#141414; --yellow:#ffd23f; --coral:#ff6b57; --teal:#0fb5a6; --blue:#4d7cfe; --pink:#ff9ecd;
+  --shadow:6px 6px 0 var(--ink);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--ink);font-family:'Space Grotesk',sans-serif;line-height:1.6;overflow-x:hidden;
+  background-image:radial-gradient(var(--ink) .8px,transparent .8px);background-size:26px 26px;background-attachment:fixed;}
+h1,h2,h3,.disp{font-family:'Archivo Black',sans-serif;text-transform:uppercase}
+a{color:inherit}
+::selection{background:var(--yellow)}
+.hand{font-family:'Caveat',cursive;font-size:1.4rem;transform:rotate(-2deg);display:inline-block}
+
+/* marquee */
+.ticker{background:var(--ink);color:var(--bg);overflow:hidden;white-space:nowrap;padding:10px 0;border-bottom:4px solid var(--ink);position:sticky;top:0;z-index:50}
+.ticker-inner{display:inline-block;animation:mq 28s linear infinite;font-weight:700;letter-spacing:.06em;font-size:.85rem;text-transform:uppercase}
+.ticker-inner span{margin:0 22px}
+.ticker-inner .y{color:var(--yellow)} .ticker-inner .c{color:var(--coral)} .ticker-inner .t{color:var(--teal)} .ticker-inner .p{color:var(--pink)}
+@keyframes mq{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+.wrap{max-width:1080px;margin:0 auto;padding:0 22px}
+
+/* hero */
+.hero{padding:70px 0 60px;position:relative}
+.badge{position:absolute;font-family:'Archivo Black',sans-serif;font-size:.72rem;text-transform:uppercase;border:3px solid var(--ink);padding:10px 14px;background:var(--yellow);box-shadow:var(--shadow);cursor:grab;user-select:none;z-index:5;line-height:1.25;text-align:center}
+.badge:active{cursor:grabbing}
+.b1{top:28px;right:6%;transform:rotate(7deg);background:var(--yellow)}
+.b2{top:150px;right:16%;transform:rotate(-6deg);background:var(--pink)}
+.b3{top:290px;right:4%;transform:rotate(4deg);background:var(--teal);color:var(--bg)}
+.hero .hi{font-size:1rem;font-weight:700;background:var(--ink);color:var(--bg);display:inline-block;padding:6px 14px;transform:rotate(-1.5deg);margin-bottom:18px}
+.hero h1{font-size:clamp(2.7rem,8vw,5.6rem);line-height:.95;letter-spacing:-.01em;cursor:pointer}
+.hero h1 .o1{color:var(--coral);-webkit-text-stroke:2.5px var(--ink)}
+.hero h1 .o2{color:transparent;-webkit-text-stroke:2.5px var(--ink)}
+.hero .sub{max-width:56ch;font-size:1.08rem;margin-top:22px}
+.hero .sub b{background:var(--yellow);padding:0 5px;box-decoration-break:clone;-webkit-box-decoration-break:clone}
+.hero-cta{margin-top:30px;display:flex;gap:14px;flex-wrap:wrap}
+.chunk{display:inline-block;font-family:'Archivo Black',sans-serif;text-transform:uppercase;font-size:.85rem;border:3px solid var(--ink);padding:13px 22px;background:var(--bg);box-shadow:var(--shadow);transition:transform .15s,box-shadow .15s;text-decoration:none}
+.chunk:hover{transform:translate(3px,3px);box-shadow:3px 3px 0 var(--ink)}
+.chunk.f{background:var(--coral);color:var(--bg)}
+.click-hint{margin-top:10px;color:#777}
+
+/* section headers */
+.sec{padding:64px 0 8px}
+.sec-tag{display:inline-block;background:var(--ink);color:var(--bg);font-family:'Archivo Black',sans-serif;text-transform:uppercase;font-size:1.5rem;padding:8px 18px;transform:rotate(-1deg);margin-bottom:30px;box-shadow:var(--shadow)}
+.sec-tag.alt{background:var(--blue)}
+.sec-tag.alt2{background:var(--teal)}
+.sec-tag.alt3{background:var(--coral)}
+
+/* stat cards */
+.stat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(215px,1fr));gap:20px}
+.scard{border:3px solid var(--ink);background:#fff;box-shadow:var(--shadow);padding:22px 20px;position:relative;transition:transform .2s}
+.scard:hover{transform:rotate(-1.4deg) scale(1.02)}
+.scard .big{font-family:'Archivo Black',sans-serif;font-size:2.6rem;line-height:1}
+.scard .lbl{font-size:.82rem;font-weight:500;margin-top:8px}
+.scard::after{content:attr(data-sticker);position:absolute;top:-14px;right:-10px;font-size:1.5rem;transform:rotate(12deg)}
+.scard.y{background:var(--yellow)} .scard.t{background:var(--teal);color:var(--bg)} .scard.p{background:var(--pink)} .scard.c{background:var(--coral);color:var(--bg)}
+
+/* quest log (experience tabs) */
+.tabs{display:flex;flex-wrap:wrap;gap:0 8px;margin-bottom:-3px;position:relative;z-index:2}
+.tab{font-family:'Archivo Black',sans-serif;text-transform:uppercase;font-size:.78rem;border:3px solid var(--ink);border-bottom:none;background:var(--bg);padding:12px 18px 14px;cursor:pointer;transition:background .2s}
+.tab.on{background:var(--yellow);padding-bottom:20px;margin-bottom:-6px}
+.tab-panel{border:3px solid var(--ink);background:#fff;box-shadow:var(--shadow);padding:30px;display:none}
+.tab-panel.on{display:block;animation:pop .3s ease}
+@keyframes pop{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.tp-head{display:flex;justify-content:space-between;align-items:flex-start;gap:14px;flex-wrap:wrap;margin-bottom:6px}
+.tp-head h3{font-size:1.3rem}
+.lvl{font-family:'Archivo Black',sans-serif;font-size:.7rem;background:var(--ink);color:var(--bg);padding:5px 10px;white-space:nowrap}
+.tp-role{font-weight:700;color:var(--coral);margin-bottom:14px}
+.tab-panel ul{list-style:none}
+.tab-panel li{padding:7px 0 7px 30px;position:relative;font-size:.95rem}
+.tab-panel li::before{content:"▸";position:absolute;left:6px;color:var(--coral);font-weight:700}
+.tab-panel li b{background:var(--yellow);padding:0 4px}
+.loot{margin-top:16px;display:flex;flex-wrap:wrap;gap:8px}
+.loot span{font-size:.7rem;font-weight:700;text-transform:uppercase;border:2px solid var(--ink);padding:4px 10px;background:var(--bg)}
+
+/* skill meters */
+.skills-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px 40px}
+.meter{margin-bottom:4px}
+.meter .m-top{display:flex;justify-content:space-between;font-weight:700;font-size:.9rem;margin-bottom:6px}
+.m-bar{height:22px;border:3px solid var(--ink);background:#fff;position:relative;overflow:hidden}
+.m-bar i{position:absolute;inset:0;width:0;transition:width 1.2s cubic-bezier(.2,.8,.2,1);background:repeating-linear-gradient(45deg,var(--fill),var(--fill) 8px,transparent 8px,transparent 12px), var(--fill)}
+.skills-note{grid-column:1/-1;margin-top:6px}
+
+/* project blueprint */
+.blueprint{border:3px solid var(--ink);background:var(--blue);color:#fff;box-shadow:var(--shadow);padding:32px;position:relative;background-image:linear-gradient(rgba(255,255,255,.14) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.14) 1px,transparent 1px);background-size:28px 28px}
+.blueprint h3{font-size:1.35rem;margin-bottom:4px}
+.blueprint .bp-sub{font-weight:700;color:var(--yellow);margin-bottom:16px}
+.blueprint ul{list-style:none}
+.blueprint li{padding:6px 0 6px 28px;position:relative;font-size:.95rem}
+.blueprint li::before{content:"◆";position:absolute;left:4px;color:var(--yellow)}
+.blueprint b{color:var(--yellow)}
+.bp-stamp{position:absolute;top:18px;right:20px;border:3px solid var(--yellow);color:var(--yellow);font-family:'Archivo Black',sans-serif;font-size:.7rem;padding:7px 10px;transform:rotate(8deg);text-transform:uppercase}
+
+/* side quests */
+.quest-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.quest{border:3px solid var(--ink);background:#fff;box-shadow:var(--shadow);padding:22px;transition:transform .2s}
+.quest:hover{transform:rotate(1deg)}
+.quest .q-ico{font-size:1.7rem}
+.quest h3{font-size:.95rem;margin:8px 0 2px}
+.quest .q-when{font-size:.72rem;font-weight:700;color:var(--coral);text-transform:uppercase;margin-bottom:8px}
+.quest p{font-size:.88rem}
+
+/* dice */
+.dice-zone{border:3px dashed var(--ink);padding:30px;text-align:center;background:rgba(255,255,255,.6)}
+.dice-btn{font-family:'Archivo Black',sans-serif;text-transform:uppercase;font-size:1rem;border:3px solid var(--ink);background:var(--pink);box-shadow:var(--shadow);padding:16px 28px;cursor:pointer;transition:transform .15s,box-shadow .15s}
+.dice-btn:hover{transform:translate(3px,3px);box-shadow:3px 3px 0 var(--ink)}
+#fact{margin-top:20px;font-size:1.15rem;font-weight:500;min-height:3.2em;max-width:60ch;margin-left:auto;margin-right:auto}
+#fact b{background:var(--yellow);padding:0 4px}
+
+/* contact */
+.contact{margin:70px 0 80px;border:3px solid var(--ink);background:var(--yellow);box-shadow:10px 10px 0 var(--ink);padding:46px 36px;text-align:center;position:relative}
+.contact h2{font-size:clamp(1.7rem,4.5vw,2.8rem);margin-bottom:10px}
+.contact p{max-width:52ch;margin:0 auto 26px;font-weight:500}
+.contact .hand{font-size:1.6rem;position:absolute;top:-18px;left:26px;background:#fff;border:3px solid var(--ink);padding:2px 14px;transform:rotate(-4deg)}
+.c-links{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+footer{text-align:center;padding:0 0 46px;font-size:.8rem;font-weight:500}
+
+/* confetti */
+.confetti{position:fixed;width:10px;height:14px;top:-20px;z-index:999;pointer-events:none}
+
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .7s,transform .7s}
+.reveal.in{opacity:1;transform:none}
+
+@media(max-width:760px){
+  .skills-grid,.quest-grid{grid-template-columns:1fr}
+  .badge{display:none}
+  .tab{font-size:.66rem;padding:10px 12px 12px}
+}
+</style>
+</head>
+<body>
+
+<div class="ticker"><div class="ticker-inner" id="tk">
+  <span class="y">★ GPA 4.46/5.00 @ NUS</span><span>SAT MATH 800/800</span><span class="c">★ SAVED 15 HRS/QTR WITH AUTOMATION</span><span>4× ANTHROPIC CERTIFIED</span><span class="t">★ TOP 3 OF 10+ TEAMS @ FERRARI</span><span>7 DEPARTMENTS ASSESSED FOR AI READINESS</span><span class="p">★ 400+ STUDENTS REACHED</span><span>SURVEY TIME CUT 60 MIN → 15 MIN</span>
+</div></div>
+
+<div class="wrap">
+
+<!-- HERO -->
+<header class="hero">
+  <div class="badge b1" title="drag me!">TOP 3<br>@ FERRARI 🏆</div>
+  <div class="badge b2">SAT MATH<br>800/800</div>
+  <div class="badge b3">4× ANTHROPIC<br>CERTIFIED 🤖</div>
+  <div class="hi">👋 Hi, hiring manager!</div>
+  <h1 id="bigname">Kaitlynne<br><span class="o1">builds</span> <span class="o2">systems</span><br>that save time.</h1>
+  <p class="sub">Year 3 (penultimate) <b>Industrial &amp; Systems Engineering</b> student at NUS — specialising in <b>Analytics &amp; Decision Intelligence</b>, minoring in Computer Science + Data Science. Currently an <b>AI Automation Engineer Intern</b> shipping pipelines that replaced manual security reporting. Singapore PR. Powered by optimisation models and an unreasonable love of spreadsheets.</p>
+  <div class="hero-cta">
+    <a class="chunk f" href="mailto:kaitlynnemaree@gmail.com">📬 Email me</a>
+    <a class="chunk" href="https://linkedin.com/in/kaitlynne-maree-chua" target="_blank" rel="noopener">LinkedIn ↗</a>
+    <a class="chunk" href="#quests">See the receipts ↓</a>
+  </div>
+  <p class="click-hint hand">psst — click my name. also, the stickers are draggable ↗</p>
+</header>
+
+<!-- STATS -->
+<section class="sec reveal">
+  <div class="sec-tag">Player Stats</div>
+  <div class="stat-grid">
+    <div class="scard y" data-sticker="📈"><div class="big" data-count="4.46" data-dec="2">0</div><div class="lbl">GPA / 5.00 — B.Eng (Hons) ISE @ NUS</div></div>
+    <div class="scard" data-sticker="⏱️"><div class="big"><span data-count="15">0</span> hrs</div><div class="lbl">saved per quarter — automated security reporting end-to-end</div></div>
+    <div class="scard t" data-sticker="✂️"><div class="big"><span data-count="75">0</span>%</div><div class="lbl">less survey time (60+ min → ~15) via a two-track redesign</div></div>
+    <div class="scard" data-sticker="🏢"><div class="big" data-count="7">0</div><div class="lbl">departments benchmarked for AI readiness (CMMI · DORA · Gartner)</div></div>
+    <div class="scard p" data-sticker="🧮"><div class="big" data-count="800">0</div><div class="lbl">SAT Math. Yes, the maximum.</div></div>
+    <div class="scard" data-sticker="🎓"><div class="big" data-count="4">0</div><div class="lbl">Anthropic certifications — Claude Code, subagents &amp; agent skills</div></div>
+    <div class="scard c" data-sticker="🏆"><div class="big">Top 3</div><div class="lbl">among 10+ international teams @ Ferrari</div></div>
+    <div class="scard" data-sticker="💻"><div class="big"><span data-count="400">0</span>+</div><div class="lbl">students reached — founded a computer donation project in Palawan</div></div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section class="sec reveal" id="quests">
+  <div class="sec-tag alt">Quest Log · Experience</div>
+  <div class="tabs" id="tabs">
+    <button class="tab on" data-t="0">Century Pacific</button>
+    <button class="tab" data-t="1">ZendEase</button>
+    <button class="tab" data-t="2">Biocellion</button>
+    <button class="tab" data-t="3">Meiban</button>
+    <button class="tab" data-t="4">Ferrari</button>
+  </div>
+
+  <div class="tab-panel on">
+    <div class="tp-head"><h3>Century Pacific Food Inc. 🇵🇭</h3><span class="lvl">MAY 2026 — PRESENT · MAIN QUEST</span></div>
+    <div class="tp-role">AI Automation Engineer Intern</div>
+    <ul>
+      <li>Engineered an automated pipeline to extract, process &amp; visualise endpoint/threat data from multiple security platforms via REST APIs — <b>manual reporting: deleted</b>.</li>
+      <li>Integrated <b>Trend Vision One + Sophos APIs</b> for real-time threat insights, saving <b>~15 hours per quarter</b>.</li>
+      <li>Co-designed a <b>3-stage assessment</b> (tiered surveys → targeted interviews → analysis) covering AI readiness &amp; SDLC maturity across <b>7 departments</b>.</li>
+      <li>Rebuilt the survey into two tracks (SMEs vs. dept heads) — respondent time dropped <b>60+ min → ~15 min</b>.</li>
+      <li>Benchmarked maturity with <b>CMMI, DORA &amp; Gartner</b> frameworks and recommended a unified SDLC.</li>
+    </ul>
+    <div class="loot"><span>+Python</span><span>+REST APIs</span><span>+Data Pipelines</span><span>+Cybersecurity Tooling</span><span>+Maturity Frameworks</span></div>
+  </div>
+
+  <div class="tab-panel">
+    <div class="tp-head"><h3>ZendEase 🇵🇭</h3><span class="lvl">JUN — AUG 2025</span></div>
+    <div class="tp-role">Business Development Intern</div>
+    <ul>
+      <li>Researched regulatory compliance for exporting goods from the Philippines to Singapore.</li>
+      <li>Built a compliance database of <b>100+ entries</b> detailing legal requirements by product.</li>
+      <li>Advised a pharmaceutical company <b>end-to-end</b> on importing into Singapore.</li>
+    </ul>
+    <div class="loot"><span>+Compliance Research</span><span>+Database Building</span><span>+Client Advisory</span></div>
+  </div>
+
+  <div class="tab-panel">
+    <div class="tp-head"><h3>Biocellion SPC</h3><span class="lvl">JAN — JUL 2024</span></div>
+    <div class="tp-role">Part-time Intern</div>
+    <ul>
+      <li>Sourced investors and funding opportunities, compiling a qualified database of <b>100+ contacts</b>.</li>
+      <li>Ran outreach across the full database with a co-intern.</li>
+    </ul>
+    <div class="loot"><span>+Investor Research</span><span>+Outreach</span><span>+Startup Reps</span></div>
+  </div>
+
+  <div class="tab-panel">
+    <div class="tp-head"><h3>Meiban Global</h3><span class="lvl">DEC 2023 · RARE DROP</span></div>
+    <div class="tp-role">Intern — MOE STEM Attachment Programme</div>
+    <ul>
+      <li><b>Selected nationally</b> from applicants across schools for the programme.</li>
+      <li>Co-authored a detailed report on plastic mould injection manufacturing, quality inspection &amp; design.</li>
+      <li>Worked directly with senior engineering and manufacturing leaders.</li>
+    </ul>
+    <div class="loot"><span>+Manufacturing</span><span>+Technical Writing</span></div>
+  </div>
+
+  <div class="tab-panel">
+    <div class="tp-head"><h3>Ferrari 🏎️</h3><span class="lvl">JAN — FEB 2023 · ACHIEVEMENT UNLOCKED</span></div>
+    <div class="tp-role">Intern — Top-3 Team</div>
+    <ul>
+      <li>Completed 10 hours of technical lectures on car mechanics.</li>
+      <li>Co-designed an electric <b>"Ferrari of the Future"</b> with an international student team.</li>
+      <li><b>Placed top 3 among 10+ teams</b> — judged by Ferrari's Head of Employer Branding &amp; University Relations.</li>
+    </ul>
+    <div class="loot"><span>+Engineering Design</span><span>+Presentation</span><span>+Podium Finish 🏆</span></div>
+  </div>
+</section>
+
+<!-- PROJECT -->
+<section class="sec reveal">
+  <div class="sec-tag alt2">Boss Fight · Project</div>
+  <div class="blueprint">
+    <div class="bp-stamp">Operations<br>Research</div>
+    <h3>Optimising Singapore's Waste Network</h3>
+    <div class="bp-sub">143 MRT collection nodes · 4 Waste-to-Energy plants · 1 carbon cap</div>
+    <ul>
+      <li>Formulated a balanced transportation model (<b>Minimum-Cost Method</b>) to allocate waste from 143 nodes across 4 WTE plants.</li>
+      <li>Built spatial networks with <b>Kruskal's MST</b>, then routed trucks with Pre-Order DFS + <b>2-Opt</b> improvement.</li>
+      <li>Modelled energy generation &amp; truck allocation in <b>Python</b> to maximise electricity output under an <b>880,381-tonne national carbon cap</b>.</li>
+      <li>Turned OR theory into visual, comparable trade-off analysis for the whole team.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section class="sec reveal">
+  <div class="sec-tag alt3">Inventory · Skills</div>
+  <div class="skills-grid">
+    <div class="meter"><div class="m-top"><span>Python · data pipelines · REST APIs</span><span>▮▮▮▮</span></div><div class="m-bar"><i style="--fill:var(--coral)" data-w="88%"></i></div></div>
+    <div class="meter"><div class="m-top"><span>Optimisation &amp; operations research</span><span>▮▮▮▮</span></div><div class="m-bar"><i style="--fill:var(--blue)" data-w="84%"></i></div></div>
+    <div class="meter"><div class="m-top"><span>Agentic AI · Claude Code · subagents</span><span>▮▮▮▮</span></div><div class="m-bar"><i style="--fill:var(--teal)" data-w="82%"></i></div></div>
+    <div class="meter"><div class="m-top"><span>Data visualisation &amp; analytics</span><span>▮▮▮▮</span></div><div class="m-bar"><i style="--fill:var(--yellow)" data-w="80%"></i></div></div>
+    <div class="meter"><div class="m-top"><span>Machine learning (EE2211: A+)</span><span>▮▮▮</span></div><div class="m-bar"><i style="--fill:var(--pink)" data-w="72%"></i></div></div>
+    <div class="meter"><div class="m-top"><span>Stakeholder interviews &amp; survey design</span><span>▮▮▮▮</span></div><div class="m-bar"><i style="--fill:var(--coral)" data-w="85%"></i></div></div>
+    <div class="meter"><div class="m-top"><span>SQL · Java · MATLAB · Arduino</span><span>▮▮</span></div><div class="m-bar"><i style="--fill:var(--blue)" data-w="55%"></i></div></div>
+    <div class="meter"><div class="m-top"><span>Public speaking · negotiation · leading</span><span>▮▮▮▮</span></div><div class="m-bar"><i style="--fill:var(--teal)" data-w="86%"></i></div></div>
+    <p class="skills-note hand">bars = self-assessed vibes, grades &amp; shipped work = verifiable facts 😌</p>
+  </div>
+</section>
+
+<!-- LEADERSHIP -->
+<section class="sec reveal">
+  <div class="sec-tag">Side Quests · Leadership</div>
+  <div class="quest-grid">
+    <div class="quest"><div class="q-ico">💰</div><h3>Finance Head — Panthera House, Ridgeview Residential College</h3><div class="q-when">Aug 2025 — Present</div><p>Managing <b>$4,000+</b> for 134 residents across <b>15+ events/semester</b>, with budget presentations to the house committee.</p></div>
+    <div class="quest"><div class="q-ico">🖥️</div><h3>President — Computer Donation Project (self-initiated)</h3><div class="q-when">Feb — Dec 2022</div><p>Fundraised + negotiated with BPO companies to procure 12 PCs at marked-down prices, delivered to a Palawan school — <b>400+ students reached</b>.</p></div>
+    <div class="quest"><div class="q-ico">🎉</div><h3>Programmes &amp; Logistics Exec — Barangay NUS</h3><div class="q-when">Aug 2024 — Present</div><p>Plans 10 events/year, initiates 2 new ones annually, and hosted a 1-hour talk on Filipino culture for NUS charity projects.</p></div>
+    <div class="quest"><div class="q-ico">🛶</div><h3>Varsity — NUS Women's Canoe Polo</h3><div class="q-when">Aug 2024 — May 2025</div><p><b>12 hrs/week</b> of training on top of a full engineering load. Time management: field-tested.</p></div>
+  </div>
+</section>
+
+<!-- DICE -->
+<section class="sec reveal">
+  <div class="sec-tag alt">Bonus Round</div>
+  <div class="dice-zone">
+    <button class="dice-btn" id="dice">🎲 Roll for a random Kaitlynne fact</button>
+    <p id="fact">Go on, roll it.</p>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact reveal" id="contact">
+  <span class="hand">your move →</span>
+  <h2>Hire the person who<br>automates the boring stuff</h2>
+  <p>Singapore-based (PR) · penultimate-year · hunting for internships in data, AI &amp; engineering. English + Filipino. Replies fast.</p>
+  <div class="c-links">
+    <a class="chunk f" href="mailto:kaitlynnemaree@gmail.com">📬 kaitlynnemaree@gmail.com</a>
+    <a class="chunk" href="https://linkedin.com/in/kaitlynne-maree-chua" target="_blank" rel="noopener">LinkedIn ↗</a>
+  </div>
+</section>
+
+</div>
+<footer>Kaitlynne Maree Chua © 2026 · handcrafted, zero templates harmed</footer>
+
+<script>
+// ticker duplicate for seamless loop
+const tk=document.getElementById('tk');tk.innerHTML+=tk.innerHTML;
+
+// reveal
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.08});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+// counters
+function cnt(el){const t=parseFloat(el.dataset.count),d=+(el.dataset.dec||0),t0=performance.now();
+  (function f(now){const p=Math.min((now-t0)/1300,1),e=1-Math.pow(1-p,3);el.textContent=(t*e).toFixed(d);if(p<1)requestAnimationFrame(f)})(t0)}
+const cio=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){cnt(e.target);cio.unobserve(e.target)}}),{threshold:.5});
+document.querySelectorAll('[data-count]').forEach(el=>cio.observe(el));
+
+// skill bars
+const bio=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.style.width=e.target.dataset.w;bio.unobserve(e.target)}}),{threshold:.4});
+document.querySelectorAll('.m-bar i').forEach(el=>bio.observe(el));
+
+// tabs
+const tabs=[...document.querySelectorAll('.tab')],panels=[...document.querySelectorAll('.tab-panel')];
+tabs.forEach(t=>t.addEventListener('click',()=>{
+  tabs.forEach(x=>x.classList.remove('on'));panels.forEach(p=>p.classList.remove('on'));
+  t.classList.add('on');panels[+t.dataset.t].classList.add('on');
+}));
+
+// draggable badges
+document.querySelectorAll('.badge').forEach(b=>{
+  let sx,sy,ox,oy,drag=false;
+  b.addEventListener('pointerdown',e=>{drag=true;sx=e.clientX;sy=e.clientY;const r=b.getBoundingClientRect(),pr=b.parentElement.getBoundingClientRect();ox=r.left-pr.left;oy=r.top-pr.top;b.setPointerCapture(e.pointerId);b.style.right='auto'});
+  b.addEventListener('pointermove',e=>{if(!drag)return;b.style.left=ox+e.clientX-sx+'px';b.style.top=oy+e.clientY-sy+'px'});
+  b.addEventListener('pointerup',()=>drag=false);
+});
+
+// facts dice
+const facts=[
+  'She scored a <b>perfect 800</b> on SAT Math — and an A+ in NUS Machine Learning.',
+  'Her automation at Century Pacific saves the security team <b>~15 hours every quarter</b>. That\'s two full workdays.',
+  'She once presented an electric "Ferrari of the Future" to Ferrari — and <b>placed top 3 of 10+ teams</b>.',
+  'She redesigned a corporate survey so well it went from <b>60+ minutes to ~15</b> per person.',
+  'At 18, she negotiated with BPO companies to get <b>12 PCs at a discount</b>, then shipped them to a school in Palawan — 400+ kids reached.',
+  'She holds <b>4 Anthropic certifications</b> in Claude Code, subagents & agent skills.',
+  'She routed Singapore\'s waste trucks with <b>Kruskal\'s MST + 2-Opt</b>… for fun (and a grade).',
+  'She trained <b>12 hours/week</b> in varsity canoe polo while carrying a 4.4+ GPA.',
+  'She manages <b>$4,000+</b> and 15+ events a semester as Finance Head of her residential college house.',
+  'She speaks English and Filipino, and built a <b>100+ entry compliance database</b> for Philippines→Singapore trade at ZendEase.'
+];
+let last=-1;
+document.getElementById('dice').addEventListener('click',()=>{
+  let i;do{i=Math.floor(Math.random()*facts.length)}while(i===last);last=i;
+  const f=document.getElementById('fact');f.style.opacity=0;
+  setTimeout(()=>{f.innerHTML=facts[i];f.style.transition='opacity .3s';f.style.opacity=1},150);
+});
+
+// confetti on name click
+const colors=['#ffd23f','#ff6b57','#0fb5a6','#4d7cfe','#ff9ecd','#141414'];
+document.getElementById('bigname').addEventListener('click',()=>{
+  for(let i=0;i<80;i++){
+    const c=document.createElement('div');c.className='confetti';
+    c.style.left=Math.random()*100+'vw';
+    c.style.background=colors[Math.floor(Math.random()*colors.length)];
+    c.style.transform=`rotate(${Math.random()*360}deg)`;
+    document.body.appendChild(c);
+    const fall=c.animate([
+      {transform:`translateY(0) rotate(0deg)`,opacity:1},
+      {transform:`translateY(${innerHeight+40}px) rotate(${540+Math.random()*360}deg)`,opacity:.9}
+    ],{duration:2200+Math.random()*1800,easing:'cubic-bezier(.2,.6,.4,1)',delay:Math.random()*300});
+    fall.onfinish=()=>c.remove();
+  }
+});
+</script>
+</body>
+</html>
+                                                                                
